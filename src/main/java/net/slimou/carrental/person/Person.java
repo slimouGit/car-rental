@@ -32,7 +32,6 @@ public class Person {
             cascade = CascadeType.ALL)
     private Person_Data person_data;
 
-
     public Integer getId() {
         return id;
     }

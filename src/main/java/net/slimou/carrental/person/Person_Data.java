@@ -4,18 +4,23 @@ import net.slimou.carrental.adress.Adress;
 import net.slimou.carrental.communication.Communication;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name="person_data")
+@Table(name = "person_data")
 public class Person_Data {
 
     public Person_Data() {
     }
 
+    public Person_Data(Person person, Adress adress, Communication communication) {
+        this.person = person;
+        this.adress = adress;
+        this.communication = communication;
+    }
+
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

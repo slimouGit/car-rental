@@ -1,6 +1,10 @@
 package net.slimou.carrental.office;
 
+import net.slimou.carrental.employee.Employee;
+import net.slimou.carrental.person.Person_Data;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="office")
@@ -20,6 +24,10 @@ public class Office {
 
     @Column(name="name")
     private String name;
+
+    @OneToOne(mappedBy = "office", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Office_Data office_data;
 
     public Integer getId() {
         return id;
