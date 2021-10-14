@@ -65,19 +65,34 @@ public class PopulateCarRental {
             pd1.setCommunication(c1);
             this.person_dataRepository.save(pd1);
 
+            Person p2 = new Person("Maria", "Musterfrau");
+            this.personRepository.save(p2);
+
+            Adress a2 = new Adress("Bach", "15", 60439, "Musterstadt");
+            this.adressRepository.save(a2);
+
+            Communication c2 = new Communication("maria@musterfrau.de", "069-123456789");
+            this.communicationRepository.save(c2);
+
+            Person_Data pd2 = new Person_Data();
+            pd2.setPerson(p2);
+            pd2.setAdress(a2);
+            pd2.setCommunication(c2);
+            this.person_dataRepository.save(pd2);
+
             Office o1 = new Office("Car 42");
             this.officeRepository.save(o1);
 
-            Adress a2 = new Adress("Zeil", "3", 12345, "Fressgass");
-            this.adressRepository.save(a2);
+            Adress a3 = new Adress("Zeil", "3", 12345, "Fressgass");
+            this.adressRepository.save(a3);
 
-            Communication c2 = new Communication("info@car42.de", "069-42424242");
-            this.communicationRepository.save(c2);
+            Communication c3 = new Communication("info@car42.de", "069-42424242");
+            this.communicationRepository.save(c3);
 
             Office_Data od1 = new Office_Data();
             od1.setOffice(o1);
-            od1.setAdress(a2);
-            od1.setCommunication(c2);
+            od1.setAdress(a3);
+            od1.setCommunication(c3);
             this.office_dataRepository.save(od1);
 
             Employee e1 = new Employee();
@@ -88,6 +103,17 @@ public class PopulateCarRental {
             e1.setOffice(o1);
             this.employeeRepository.save(e1);
 
+            Employee e2 = new Employee();
+            e2.setRole(Employee.Role.MANAGER);
+            e2.setSalary(100000.00);
+            e2.setDate_of_employment(LocalDate.of(1972,12,30));
+            e2.setPerson(p2);
+            e2.setOffice(o1);
+            this.employeeRepository.save(e2);
+
+            o1.setEmployees(Arrays.asList(e1,e2));
+            logger.info("Employees {}", o1.getEmployees());
+            o1.getEmployees().forEach(e->logger.info("E: {}",e.getPerson().getForname()));
 
 
         };

@@ -25,6 +25,9 @@ public class Office {
     @Column(name="name")
     private String name;
 
+    @OneToMany(mappedBy="office")
+    private List<Employee> employees;
+
     @OneToOne(mappedBy = "office", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Office_Data office_data;
@@ -43,6 +46,14 @@ public class Office {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override

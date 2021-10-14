@@ -36,8 +36,7 @@ public class Employee {
     @JoinColumn(name = "person")
     private Person person;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "office")
+    @ManyToOne
     private Office office;
 
     public Integer getId() {
@@ -87,4 +86,5 @@ public class Employee {
     public void setOffice(Office office) {
         this.office = office;
     }
+
 }
