@@ -2,7 +2,6 @@ package net.slimou.carrental.employee;
 
 import net.slimou.carrental.office.Office;
 import net.slimou.carrental.person.Person;
-import net.slimou.carrental.person.Person_Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

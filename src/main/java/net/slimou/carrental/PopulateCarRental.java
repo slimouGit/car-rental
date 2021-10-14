@@ -8,6 +8,8 @@ import net.slimou.carrental.customer.Customer;
 import net.slimou.carrental.customer.CustomerRepository;
 import net.slimou.carrental.employee.Employee;
 import net.slimou.carrental.employee.EmployeeRepository;
+import net.slimou.carrental.fleet.Car;
+import net.slimou.carrental.fleet.CarRepository;
 import net.slimou.carrental.office.Office;
 import net.slimou.carrental.office.OfficeRepository;
 import net.slimou.carrental.office.Office_Data;
@@ -38,6 +40,7 @@ public class PopulateCarRental {
     private Person_DataRepository person_dataRepository;
     private EmployeeRepository employeeRepository;
     private CustomerRepository customerRepository;
+    private CarRepository carRepository;
 
     public PopulateCarRental(AdressRepository adressRepository,
                              CommunicationRepository communicationRepository,
@@ -46,7 +49,8 @@ public class PopulateCarRental {
                              PersonRepository personRepository,
                              Person_DataRepository person_dataRepository,
                              EmployeeRepository employeeRepository,
-                             CustomerRepository customerRepository) {
+                             CustomerRepository customerRepository,
+                             CarRepository carRepository) {
         this.adressRepository = adressRepository;
         this.communicationRepository = communicationRepository;
         this.officeRepository = officeRepository;
@@ -55,6 +59,7 @@ public class PopulateCarRental {
         this.person_dataRepository = person_dataRepository;
         this.employeeRepository = employeeRepository;
         this.customerRepository = customerRepository;
+        this.carRepository = carRepository;
     }
 
     @Bean
@@ -150,8 +155,7 @@ public class PopulateCarRental {
             //--------------------------------------------
 
             o1.setEmployees(Arrays.asList(e1,e2));
-            logger.info("Employees {}", o1.getEmployees());
-            o1.getEmployees().forEach(e->logger.info("E: {}",e.getPerson().getForname()));
+            o1.getEmployees().forEach(e->logger.info("Employee: {}",e.getPerson().getForname()));
 
             //--------------------------------------------
 
@@ -162,8 +166,25 @@ public class PopulateCarRental {
             //--------------------------------------------
 
             o1.setCustomers(Arrays.asList(customer1));
-            logger.info("Employees {}", o1.getEmployees());
-            o1.getEmployees().forEach(e->logger.info("E: {}",e.getPerson().getForname()));
+            o1.getCustomers().forEach(e->logger.info("Customer: {}",e.getPerson().getForname()));
+
+            //--------------------------------------------
+
+            Car car1 = new Car();
+            car1.setModel(Car.Model.COUPE);
+            car1.setSeat(2);
+            car1.setLicence_number("F-LO 666");
+            car1.setHorsepower(75);
+            car1.setEngine(Car.Engine.AUTOMATIC);
+            car1.setMileage(84.000);
+            car1.setRegistration_date(LocalDate.of(2011,1,11));
+            car1.setOffice(o1);
+            this.carRepository.save(car1);
+
+            //--------------------------------------------
+
+            o1.setCars(Arrays.asList(car1));
+            o1.getCars().forEach(c->logger.info("Car: {}",c.getLicence_number()));
 
 
         };
