@@ -1,6 +1,8 @@
 package net.slimou.carrental.office;
 
+import net.slimou.carrental.customer.Customer;
 import net.slimou.carrental.employee.Employee;
+import net.slimou.carrental.person.Person;
 import net.slimou.carrental.person.Person_Data;
 
 import javax.persistence.*;
@@ -28,6 +30,9 @@ public class Office {
     @OneToMany(mappedBy="office")
     private List<Employee> employees;
 
+    @OneToMany(mappedBy="office")
+    private List<Customer> customers;
+
     @OneToOne(mappedBy = "office", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Office_Data office_data;
@@ -54,6 +59,22 @@ public class Office {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public Office_Data getOffice_data() {
+        return office_data;
+    }
+
+    public void setOffice_data(Office_Data office_data) {
+        this.office_data = office_data;
     }
 
     @Override

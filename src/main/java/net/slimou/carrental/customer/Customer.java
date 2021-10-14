@@ -1,5 +1,6 @@
 package net.slimou.carrental.customer;
 
+import net.slimou.carrental.office.Office;
 import net.slimou.carrental.person.Person;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,6 +10,14 @@ import java.time.LocalDate;
 @Entity
 @Table(name="customer")
 public class Customer {
+
+    public Customer() {
+    }
+
+    public Customer(LocalDate entrydate, Person person) {
+        this.entrydate = entrydate;
+        this.person = person;
+    }
 
     @Id
     @Column(name = "id")
@@ -23,5 +32,38 @@ public class Customer {
     @JoinColumn(name = "person")
     private Person person;
 
+    @ManyToOne
+    private Office office;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public LocalDate getEntrydate() {
+        return entrydate;
+    }
+
+    public void setEntrydate(LocalDate entrydate) {
+        this.entrydate = entrydate;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
+    }
 }
