@@ -6,6 +6,8 @@ import net.slimou.carrental.communication.Communication;
 import net.slimou.carrental.communication.CommunicationRepository;
 import net.slimou.carrental.customer.Customer;
 import net.slimou.carrental.customer.CustomerRepository;
+import net.slimou.carrental.drive.Drive;
+import net.slimou.carrental.drive.DriveRepository;
 import net.slimou.carrental.employee.Employee;
 import net.slimou.carrental.employee.EmployeeRepository;
 import net.slimou.carrental.fleet.Car;
@@ -25,6 +27,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Component
@@ -41,6 +44,7 @@ public class PopulateCarRental {
     private EmployeeRepository employeeRepository;
     private CustomerRepository customerRepository;
     private CarRepository carRepository;
+    private DriveRepository driveRepository;
 
     public PopulateCarRental(AdressRepository adressRepository,
                              CommunicationRepository communicationRepository,
@@ -50,7 +54,8 @@ public class PopulateCarRental {
                              Person_DataRepository person_dataRepository,
                              EmployeeRepository employeeRepository,
                              CustomerRepository customerRepository,
-                             CarRepository carRepository) {
+                             CarRepository carRepository,
+                             DriveRepository driveRepository) {
         this.adressRepository = adressRepository;
         this.communicationRepository = communicationRepository;
         this.officeRepository = officeRepository;
@@ -60,6 +65,7 @@ public class PopulateCarRental {
         this.employeeRepository = employeeRepository;
         this.customerRepository = customerRepository;
         this.carRepository = carRepository;
+        this.driveRepository = driveRepository;
     }
 
     @Bean
@@ -159,7 +165,7 @@ public class PopulateCarRental {
 
             //--------------------------------------------
 
-            Customer customer1 = new Customer(LocalDate.of(1984,01,01),p3);
+            Customer customer1 = new Customer(LocalDate.of(1984,1,1),p3);
             customer1.setOffice(o1);
             this.customerRepository.save(customer1);
 
@@ -186,6 +192,14 @@ public class PopulateCarRental {
             o1.setCars(Arrays.asList(car1));
             o1.getCars().forEach(c->logger.info("Car: {}",c.getLicence_number()));
 
+            //--------------------------------------------
+
+            Drive d1 = new Drive();
+            d1.setStart(LocalDateTime.of(2021,9,2,15,42,15));
+            d1.setEnd(LocalDateTime.of(2021,9,3,16,10,2));
+            d1.setDistance(50.45);
+            d1.setConsumption(8.4);
+            this.driveRepository.save(d1);
 
         };
     }
