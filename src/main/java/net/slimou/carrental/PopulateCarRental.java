@@ -199,6 +199,7 @@ public class PopulateCarRental {
             d1.setEnd(LocalDateTime.of(2021,9,3,16,10,2));
             d1.setDistance(50.45);
             d1.setConsumption(8.4);
+            d1.setCompletion(true);
             this.driveRepository.save(d1);
 
         };

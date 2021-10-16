@@ -33,6 +33,9 @@ public class Drive {
     @Column(name="consumption")
     private Double consumption;
 
+    @Column(columnDefinition = "boolean default false", name = "completion")
+    private Boolean completion;
+
     public Integer getId() {
         return id;
     }
@@ -55,6 +58,14 @@ public class Drive {
 
     public void setEnd(LocalDateTime end) {
         this.end = end;
+    }
+
+    public Boolean getCompletion() {
+        return completion;
+    }
+
+    public void setCompletion(Boolean completion) {
+        this.completion = completion;
     }
 
     public Double getDistance() {
