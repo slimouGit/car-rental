@@ -112,6 +112,10 @@ public class PopulateCarRental {
 
             p1.setPerson_data(pd1);
             this.personRepository.save(p1);
+            a1.setPerson_data(pd1);
+            this.adressRepository.save(a1);
+            c1.setPerson_data(pd1);
+            this.communicationRepository.save(c1);
 
             //--------------------------------------------
 
@@ -132,6 +136,10 @@ public class PopulateCarRental {
 
             p2.setPerson_data(pd2);
             this.personRepository.save(p2);
+            a2.setPerson_data(pd2);
+            this.adressRepository.save(a2);
+            c2.setPerson_data(pd2);
+            this.communicationRepository.save(c2);
 
             //--------------------------------------------
 
@@ -152,6 +160,10 @@ public class PopulateCarRental {
 
             p3.setPerson_data(pd3);
             this.personRepository.save(p3);
+            a3.setPerson_data(pd3);
+            this.adressRepository.save(a3);
+            c3.setPerson_data(pd3);
+            this.communicationRepository.save(c3);
 
             //--------------------------------------------
 
@@ -172,6 +184,10 @@ public class PopulateCarRental {
 
             o1.setOffice_data(od1);
             this.officeRepository.save(o1);
+            a4.setOffice_data(od1);
+            this.adressRepository.save(a4);
+            c4.setOffice_data(od1);
+            this.communicationRepository.save(c1);
 
             //--------------------------------------------
 
@@ -262,6 +278,8 @@ public class PopulateCarRental {
             //--------------------------------------------
 
             Invoice invoice1 = new Invoice();
+            invoice1.setMarked_out(false);
+            invoice1.setSettled_in(false);
             this.invoiceRepository.save(invoice1);
 
             //--------------------------------------------
@@ -269,6 +287,7 @@ public class PopulateCarRental {
             Drive d1 = new Drive();
             d1.setStart(LocalDateTime.of(2021,9,2,15,42,15));
             d1.setEnd(LocalDateTime.of(2021,9,3,16,10,2));
+            d1.setCompletion(false);
             this.driveRepository.save(d1);
             
             //--------------------------------------------
@@ -292,11 +311,8 @@ public class PopulateCarRental {
 
             //--------------------------------------------
 
-
-
-
-
             logger.info("End");
         };
     }
+
 }
