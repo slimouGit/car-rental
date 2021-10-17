@@ -18,6 +18,8 @@ import net.slimou.carrental.office.Office_Data;
 import net.slimou.carrental.office.Office_DataRepository;
 import net.slimou.carrental.order.Invoice;
 import net.slimou.carrental.order.InvoiceRepository;
+import net.slimou.carrental.order.Reservation;
+import net.slimou.carrental.order.ReservationRepository;
 import net.slimou.carrental.person.Person;
 import net.slimou.carrental.person.PersonRepository;
 import net.slimou.carrental.person.Person_Data;
@@ -53,6 +55,7 @@ public class PopulateCarRental {
     private OrderBookRepository orderBookRepository;
     private AccountRepository accountRepository;
     private InvoiceRepository invoiceRepository;
+    private ReservationRepository reservationRepository;
 
     public PopulateCarRental(AdressRepository adressRepository,
                              CommunicationRepository communicationRepository,
@@ -69,7 +72,8 @@ public class PopulateCarRental {
                              ClienteleRepository clienteleRepository,
                              OrderBookRepository orderBookRepository,
                              AccountRepository accountRepository,
-                             InvoiceRepository invoiceRepository) {
+                             InvoiceRepository invoiceRepository,
+                             ReservationRepository reservationRepository) {
         this.adressRepository = adressRepository;
         this.communicationRepository = communicationRepository;
         this.officeRepository = officeRepository;
@@ -86,6 +90,7 @@ public class PopulateCarRental {
         this.orderBookRepository = orderBookRepository;
         this.accountRepository = accountRepository;
         this.invoiceRepository = invoiceRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     @Bean
@@ -265,6 +270,29 @@ public class PopulateCarRental {
             
             //--------------------------------------------
 
+            Reservation r1 = new Reservation();
+            r1.setRental_start(LocalDate.of(2011,1,11));
+            r1.setRental_end(LocalDate.of(2011,1,12));
+            r1.setAccount(account1);
+            this.reservationRepository.save(r1);
+
+            //--------------------------------------------
+
+            account1.setReservations(Arrays.asList(r1));
+            account1.getReservations().forEach(e->logger.info("Customer Reservation: {}",e.getRental_end()));
+
+            //--------------------------------------------
+
+
+            //finalize construct and log structure
+            customer1.setAccount(account1);
+            this.customerRepository.save(customer1);
+            o1.setStaff(staff1);
+            o1.setFleet(fleet1);
+            o1.setClientele(clientele1);
+            this.officeRepository.save(o1);
+
+            logger.info("End");
         };
     }
 }

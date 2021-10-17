@@ -1,6 +1,9 @@
 package net.slimou.carrental.customer;
 
+import net.slimou.carrental.order.Reservation;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="account")
@@ -13,6 +16,9 @@ public class Account {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer")
     private Customer customer;
+
+    @OneToMany(mappedBy="account")
+    private List<Reservation> reservations;
 
     public Integer getId() {
         return id;
@@ -28,5 +34,13 @@ public class Account {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }
