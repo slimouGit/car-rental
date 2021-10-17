@@ -33,7 +33,7 @@ public class Customer {
     private Person person;
 
     @ManyToOne
-    private Office office;
+    private Clientele clientele;
 
     public Integer getId() {
         return id;
@@ -59,11 +59,11 @@ public class Customer {
         this.person = person;
     }
 
-    public Office getOffice() {
-        return office;
+    public Clientele getClientele() {
+        return clientele;
     }
 
-    public void setOffice(Office office) {
-        this.office = office;
+    public void setClientele(Clientele clientele) {
+        this.clientele = clientele;
     }
 }

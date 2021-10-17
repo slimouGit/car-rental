@@ -4,6 +4,8 @@ import net.slimou.carrental.adress.Adress;
 import net.slimou.carrental.adress.AdressRepository;
 import net.slimou.carrental.communication.Communication;
 import net.slimou.carrental.communication.CommunicationRepository;
+import net.slimou.carrental.customer.Clientele;
+import net.slimou.carrental.customer.ClienteleRepository;
 import net.slimou.carrental.customer.Customer;
 import net.slimou.carrental.customer.CustomerRepository;
 import net.slimou.carrental.drive.Drive;
@@ -51,6 +53,7 @@ public class PopulateCarRental {
     private DriveRepository driveRepository;
     private FleetRepository fleetRepository;
     private StaffRepository staffRepository;
+    private ClienteleRepository clienteleRepository;
 
     public PopulateCarRental(AdressRepository adressRepository,
                              CommunicationRepository communicationRepository,
@@ -63,7 +66,8 @@ public class PopulateCarRental {
                              CarRepository carRepository,
                              DriveRepository driveRepository,
                              FleetRepository fleetRepository,
-                             StaffRepository staffRepository) {
+                             StaffRepository staffRepository,
+                             ClienteleRepository clienteleRepository) {
         this.adressRepository = adressRepository;
         this.communicationRepository = communicationRepository;
         this.officeRepository = officeRepository;
@@ -76,6 +80,7 @@ public class PopulateCarRental {
         this.driveRepository = driveRepository;
         this.fleetRepository = fleetRepository;
         this.staffRepository = staffRepository;
+        this.clienteleRepository = clienteleRepository;
     }
 
     @Bean
@@ -181,14 +186,20 @@ public class PopulateCarRental {
 
             //--------------------------------------------
 
+            Clientele clientele1 = new Clientele();
+            clientele1.setOffice(o1);
+            this.clienteleRepository.save(clientele1);
+
+            //--------------------------------------------
+
             Customer customer1 = new Customer(LocalDate.of(1984,1,1),p3);
-            customer1.setOffice(o1);
+            customer1.setClientele(clientele1);
             this.customerRepository.save(customer1);
 
             //--------------------------------------------
 
-            o1.setCustomers(Arrays.asList(customer1));
-            o1.getCustomers().forEach(e->logger.info("Customer: {}",e.getPerson().getForname()));
+            clientele1.setCustomers(Arrays.asList(customer1));
+            clientele1.getCustomers().forEach(e->logger.info("Customer: {}",e.getPerson().getForname()));
 
             //--------------------------------------------
 

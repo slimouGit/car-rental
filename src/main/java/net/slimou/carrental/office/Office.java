@@ -1,5 +1,6 @@
 package net.slimou.carrental.office;
 
+import net.slimou.carrental.customer.Clientele;
 import net.slimou.carrental.customer.Customer;
 import net.slimou.carrental.employee.Employee;
 import net.slimou.carrental.employee.Staff;
@@ -32,8 +33,9 @@ public class Office {
             cascade = CascadeType.ALL)
     private Staff staff;
 
-    @OneToMany(mappedBy="office")
-    private List<Customer> customers;
+    @OneToOne(mappedBy = "office", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Clientele clientele;
 
     @OneToOne(mappedBy = "office", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
@@ -75,12 +77,12 @@ public class Office {
         this.staff = staff;
     }
 
-    public List<Customer> getCustomers() {
-        return customers;
+    public Clientele getClientele() {
+        return clientele;
     }
 
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
+    public void setClientele(Clientele clientele) {
+        this.clientele = clientele;
     }
 
     public Office_Data getOffice_data() {
