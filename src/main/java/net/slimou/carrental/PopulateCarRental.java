@@ -52,7 +52,6 @@ public class PopulateCarRental {
     private FleetRepository fleetRepository;
     private StaffRepository staffRepository;
     private ClienteleRepository clienteleRepository;
-    private OrderBookRepository orderBookRepository;
     private AccountRepository accountRepository;
     private InvoiceRepository invoiceRepository;
     private ReservationRepository reservationRepository;
@@ -70,7 +69,6 @@ public class PopulateCarRental {
                              FleetRepository fleetRepository,
                              StaffRepository staffRepository,
                              ClienteleRepository clienteleRepository,
-                             OrderBookRepository orderBookRepository,
                              AccountRepository accountRepository,
                              InvoiceRepository invoiceRepository,
                              ReservationRepository reservationRepository) {
@@ -87,7 +85,6 @@ public class PopulateCarRental {
         this.fleetRepository = fleetRepository;
         this.staffRepository = staffRepository;
         this.clienteleRepository = clienteleRepository;
-        this.orderBookRepository = orderBookRepository;
         this.accountRepository = accountRepository;
         this.invoiceRepository = invoiceRepository;
         this.reservationRepository = reservationRepository;
@@ -112,6 +109,9 @@ public class PopulateCarRental {
             pd1.setCommunication(c1);
             this.person_dataRepository.save(pd1);
 
+            p1.setPerson_data(pd1);
+            this.personRepository.save(p1);
+
             //--------------------------------------------
 
             Person p2 = new Person("Maria", "Musterfrau");
@@ -128,6 +128,9 @@ public class PopulateCarRental {
             pd2.setAdress(a2);
             pd2.setCommunication(c2);
             this.person_dataRepository.save(pd2);
+
+            p2.setPerson_data(pd2);
+            this.personRepository.save(p2);
 
             //--------------------------------------------
 
@@ -146,6 +149,9 @@ public class PopulateCarRental {
             pd3.setCommunication(c3);
             this.person_dataRepository.save(pd3);
 
+            p3.setPerson_data(pd3);
+            this.personRepository.save(p3);
+
             //--------------------------------------------
 
             Office o1 = new Office("Car 42");
@@ -162,6 +168,9 @@ public class PopulateCarRental {
             od1.setAdress(a4);
             od1.setCommunication(c4);
             this.office_dataRepository.save(od1);
+
+            o1.setOffice_data(od1);
+            this.officeRepository.save(o1);
 
             //--------------------------------------------
 
@@ -234,16 +243,6 @@ public class PopulateCarRental {
 
             fleet1.setCars(Arrays.asList(car1));
             fleet1.getCars().forEach(c->logger.info("Car: {}",c.getLicence_number()));
-
-            //--------------------------------------------
-
-            OrderBook ob1 = new OrderBook();
-            ob1.setEmployee(e1);
-            this.orderBookRepository.save(ob1);
-
-            OrderBook ob2 = new OrderBook();
-            ob2.setEmployee(e2);
-            this.orderBookRepository.save(ob2);
 
             //--------------------------------------------
 

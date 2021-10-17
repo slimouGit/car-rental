@@ -1,8 +1,6 @@
 package net.slimou.carrental.communication;
 
-import net.slimou.carrental.office.Office;
 import net.slimou.carrental.office.Office_Data;
-import net.slimou.carrental.person.Person;
 import net.slimou.carrental.person.Person_Data;
 
 import javax.persistence.*;
@@ -66,21 +64,7 @@ public class Communication {
         this.phone = phone;
     }
 
-    public Office_Data getOffice_data() {
-        return office_data;
-    }
 
-    public void setOffice_data(Office_Data office_data) {
-        this.office_data = office_data;
-    }
-
-    public Person_Data getPerson_data() {
-        return person_data;
-    }
-
-    public void setPerson_data(Person_Data person_data) {
-        this.person_data = person_data;
-    }
 
     @Override
     public boolean equals(Object o) {

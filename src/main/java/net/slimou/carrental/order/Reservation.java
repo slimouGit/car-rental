@@ -1,9 +1,6 @@
 package net.slimou.carrental.order;
 
 import net.slimou.carrental.customer.Account;
-import net.slimou.carrental.employee.Employee;
-import net.slimou.carrental.employee.OrderBook;
-import net.slimou.carrental.employee.Staff;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
