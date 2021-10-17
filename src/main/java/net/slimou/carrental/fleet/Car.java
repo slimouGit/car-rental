@@ -1,6 +1,5 @@
 package net.slimou.carrental.fleet;
 
-import net.slimou.carrental.office.Office;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -67,7 +66,7 @@ public class Car {
     private LocalDate registration_date;
 
     @ManyToOne
-    private Office office;
+    private Fleet fleet;
 
     @Override
     public boolean equals(Object o) {
@@ -86,7 +85,7 @@ public class Car {
         if (mileage != null ? !mileage.equals(car.mileage) : car.mileage != null) return false;
         if (registration_date != null ? !registration_date.equals(car.registration_date) : car.registration_date != null)
             return false;
-        return office != null ? office.equals(car.office) : car.office == null;
+        return fleet != null ? fleet.equals(car.fleet) : car.fleet == null;
     }
 
     @Override
@@ -99,7 +98,7 @@ public class Car {
         result = 31 * result + (engine != null ? engine.hashCode() : 0);
         result = 31 * result + (mileage != null ? mileage.hashCode() : 0);
         result = 31 * result + (registration_date != null ? registration_date.hashCode() : 0);
-        result = 31 * result + (office != null ? office.hashCode() : 0);
+        result = 31 * result + (fleet != null ? fleet.hashCode() : 0);
         return result;
     }
 
@@ -114,7 +113,7 @@ public class Car {
                 ", engine=" + engine +
                 ", mileage=" + mileage +
                 ", registration_data=" + registration_date +
-                ", office=" + office +
+                ", fleet=" + fleet +
                 '}';
     }
 
@@ -182,11 +181,11 @@ public class Car {
         this.registration_date = registration_date;
     }
 
-    public Office getOffice() {
-        return office;
+    public Fleet getFleet() {
+        return fleet;
     }
 
-    public void setOffice(Office office) {
-        this.office = office;
+    public void setFleet(Fleet fleet) {
+        this.fleet = fleet;
     }
 }

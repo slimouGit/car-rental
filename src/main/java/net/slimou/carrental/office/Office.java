@@ -2,7 +2,9 @@ package net.slimou.carrental.office;
 
 import net.slimou.carrental.customer.Customer;
 import net.slimou.carrental.employee.Employee;
+import net.slimou.carrental.employee.Staff;
 import net.slimou.carrental.fleet.Car;
+import net.slimou.carrental.fleet.Fleet;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,14 +28,16 @@ public class Office {
     @Column(name="name")
     private String name;
 
-    @OneToMany(mappedBy="office")
-    private List<Employee> employees;
+    @OneToOne(mappedBy = "office", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Staff staff;
 
     @OneToMany(mappedBy="office")
     private List<Customer> customers;
 
-    @OneToMany(mappedBy="office")
-    private List<Car> cars;
+    @OneToOne(mappedBy = "office", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Fleet fleet;
 
     @OneToOne(mappedBy = "office", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
@@ -55,12 +59,20 @@ public class Office {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
+    public Fleet getFleet() {
+        return fleet;
     }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    public void setFleet(Fleet fleet) {
+        this.fleet = fleet;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 
     public List<Customer> getCustomers() {
@@ -69,14 +81,6 @@ public class Office {
 
     public void setCustomers(List<Customer> customers) {
         this.customers = customers;
-    }
-
-    public List<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(List<Car> cars) {
-        this.cars = cars;
     }
 
     public Office_Data getOffice_data() {

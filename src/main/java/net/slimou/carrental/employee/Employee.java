@@ -1,6 +1,5 @@
 package net.slimou.carrental.employee;
 
-import net.slimou.carrental.office.Office;
 import net.slimou.carrental.person.Person;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,7 +35,7 @@ public class Employee {
     private Person person;
 
     @ManyToOne
-    private Office office;
+    private Staff staff;
 
     public Integer getId() {
         return id;
@@ -78,12 +77,11 @@ public class Employee {
         this.person = person;
     }
 
-    public Office getOffice() {
-        return office;
+    public Staff getStaff() {
+        return staff;
     }
 
-    public void setOffice(Office office) {
-        this.office = office;
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
-
 }

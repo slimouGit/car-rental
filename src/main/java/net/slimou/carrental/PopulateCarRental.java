@@ -10,8 +10,12 @@ import net.slimou.carrental.drive.Drive;
 import net.slimou.carrental.drive.DriveRepository;
 import net.slimou.carrental.employee.Employee;
 import net.slimou.carrental.employee.EmployeeRepository;
+import net.slimou.carrental.employee.Staff;
+import net.slimou.carrental.employee.StaffRepository;
 import net.slimou.carrental.fleet.Car;
 import net.slimou.carrental.fleet.CarRepository;
+import net.slimou.carrental.fleet.Fleet;
+import net.slimou.carrental.fleet.FleetRepository;
 import net.slimou.carrental.office.Office;
 import net.slimou.carrental.office.OfficeRepository;
 import net.slimou.carrental.office.Office_Data;
@@ -45,6 +49,8 @@ public class PopulateCarRental {
     private CustomerRepository customerRepository;
     private CarRepository carRepository;
     private DriveRepository driveRepository;
+    private FleetRepository fleetRepository;
+    private StaffRepository staffRepository;
 
     public PopulateCarRental(AdressRepository adressRepository,
                              CommunicationRepository communicationRepository,
@@ -55,7 +61,9 @@ public class PopulateCarRental {
                              EmployeeRepository employeeRepository,
                              CustomerRepository customerRepository,
                              CarRepository carRepository,
-                             DriveRepository driveRepository) {
+                             DriveRepository driveRepository,
+                             FleetRepository fleetRepository,
+                             StaffRepository staffRepository) {
         this.adressRepository = adressRepository;
         this.communicationRepository = communicationRepository;
         this.officeRepository = officeRepository;
@@ -66,6 +74,8 @@ public class PopulateCarRental {
         this.customerRepository = customerRepository;
         this.carRepository = carRepository;
         this.driveRepository = driveRepository;
+        this.fleetRepository = fleetRepository;
+        this.staffRepository = staffRepository;
     }
 
     @Bean
@@ -140,12 +150,18 @@ public class PopulateCarRental {
 
             //--------------------------------------------
 
+            Staff staff1 = new Staff();
+            staff1.setOffice(o1);
+            this.staffRepository.save(staff1);
+
+            //--------------------------------------------
+
             Employee e1 = new Employee();
             e1.setRole(Employee.Role.CONSULTANT);
             e1.setSalary(64000.00);
             e1.setDate_of_employment(LocalDate.of(1972,12,30));
             e1.setPerson(p1);
-            e1.setOffice(o1);
+            e1.setStaff(staff1);
             this.employeeRepository.save(e1);
 
             //--------------------------------------------
@@ -155,13 +171,13 @@ public class PopulateCarRental {
             e2.setSalary(100000.00);
             e2.setDate_of_employment(LocalDate.of(1972,12,30));
             e2.setPerson(p2);
-            e2.setOffice(o1);
+            e2.setStaff(staff1);
             this.employeeRepository.save(e2);
 
             //--------------------------------------------
 
-            o1.setEmployees(Arrays.asList(e1,e2));
-            o1.getEmployees().forEach(e->logger.info("Employee: {}",e.getPerson().getForname()));
+            staff1.setEmployees(Arrays.asList(e1,e2));
+            staff1.getEmployees().forEach(e->logger.info("Employee: {}",e.getPerson().getForname()));
 
             //--------------------------------------------
 
@@ -176,6 +192,12 @@ public class PopulateCarRental {
 
             //--------------------------------------------
 
+            Fleet fleet1 = new Fleet();
+            fleet1.setOffice(o1);
+            this.fleetRepository.save(fleet1);
+
+            //--------------------------------------------
+
             Car car1 = new Car();
             car1.setModel(Car.Model.COUPE);
             car1.setSeat(2);
@@ -184,13 +206,13 @@ public class PopulateCarRental {
             car1.setEngine(Car.Engine.AUTOMATIC);
             car1.setMileage(84.000);
             car1.setRegistration_date(LocalDate.of(2011,1,11));
-            car1.setOffice(o1);
+            car1.setFleet(fleet1);
             this.carRepository.save(car1);
 
             //--------------------------------------------
 
-            o1.setCars(Arrays.asList(car1));
-            o1.getCars().forEach(c->logger.info("Car: {}",c.getLicence_number()));
+            fleet1.setCars(Arrays.asList(car1));
+            fleet1.getCars().forEach(c->logger.info("Car: {}",c.getLicence_number()));
 
             //--------------------------------------------
 
