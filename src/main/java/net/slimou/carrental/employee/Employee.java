@@ -34,6 +34,10 @@ public class Employee {
     @JoinColumn(name = "person")
     private Person person;
 
+    @OneToOne(mappedBy = "employee", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private OrderBook orderBook;
+
     @ManyToOne
     private Staff staff;
 
@@ -83,5 +87,13 @@ public class Employee {
 
     public void setStaff(Staff staff) {
         this.staff = staff;
+    }
+
+    public OrderBook getOrderBook() {
+        return orderBook;
+    }
+
+    public void setOrderBook(OrderBook orderBook) {
+        this.orderBook = orderBook;
     }
 }

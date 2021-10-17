@@ -4,16 +4,10 @@ import net.slimou.carrental.adress.Adress;
 import net.slimou.carrental.adress.AdressRepository;
 import net.slimou.carrental.communication.Communication;
 import net.slimou.carrental.communication.CommunicationRepository;
-import net.slimou.carrental.customer.Clientele;
-import net.slimou.carrental.customer.ClienteleRepository;
-import net.slimou.carrental.customer.Customer;
-import net.slimou.carrental.customer.CustomerRepository;
+import net.slimou.carrental.customer.*;
 import net.slimou.carrental.drive.Drive;
 import net.slimou.carrental.drive.DriveRepository;
-import net.slimou.carrental.employee.Employee;
-import net.slimou.carrental.employee.EmployeeRepository;
-import net.slimou.carrental.employee.Staff;
-import net.slimou.carrental.employee.StaffRepository;
+import net.slimou.carrental.employee.*;
 import net.slimou.carrental.fleet.Car;
 import net.slimou.carrental.fleet.CarRepository;
 import net.slimou.carrental.fleet.Fleet;
@@ -22,6 +16,8 @@ import net.slimou.carrental.office.Office;
 import net.slimou.carrental.office.OfficeRepository;
 import net.slimou.carrental.office.Office_Data;
 import net.slimou.carrental.office.Office_DataRepository;
+import net.slimou.carrental.order.Invoice;
+import net.slimou.carrental.order.InvoiceRepository;
 import net.slimou.carrental.person.Person;
 import net.slimou.carrental.person.PersonRepository;
 import net.slimou.carrental.person.Person_Data;
@@ -54,6 +50,9 @@ public class PopulateCarRental {
     private FleetRepository fleetRepository;
     private StaffRepository staffRepository;
     private ClienteleRepository clienteleRepository;
+    private OrderBookRepository orderBookRepository;
+    private AccountRepository accountRepository;
+    private InvoiceRepository invoiceRepository;
 
     public PopulateCarRental(AdressRepository adressRepository,
                              CommunicationRepository communicationRepository,
@@ -67,7 +66,10 @@ public class PopulateCarRental {
                              DriveRepository driveRepository,
                              FleetRepository fleetRepository,
                              StaffRepository staffRepository,
-                             ClienteleRepository clienteleRepository) {
+                             ClienteleRepository clienteleRepository,
+                             OrderBookRepository orderBookRepository,
+                             AccountRepository accountRepository,
+                             InvoiceRepository invoiceRepository) {
         this.adressRepository = adressRepository;
         this.communicationRepository = communicationRepository;
         this.officeRepository = officeRepository;
@@ -81,6 +83,9 @@ public class PopulateCarRental {
         this.fleetRepository = fleetRepository;
         this.staffRepository = staffRepository;
         this.clienteleRepository = clienteleRepository;
+        this.orderBookRepository = orderBookRepository;
+        this.accountRepository = accountRepository;
+        this.invoiceRepository = invoiceRepository;
     }
 
     @Bean
@@ -227,6 +232,29 @@ public class PopulateCarRental {
 
             //--------------------------------------------
 
+            OrderBook ob1 = new OrderBook();
+            ob1.setEmployee(e1);
+            this.orderBookRepository.save(ob1);
+
+            OrderBook ob2 = new OrderBook();
+            ob2.setEmployee(e2);
+            this.orderBookRepository.save(ob2);
+
+            //--------------------------------------------
+
+            Account account1 = new Account();
+            account1.setCustomer(customer1);
+            this.accountRepository.save(account1);
+
+            //--------------------------------------------
+
+            Invoice invoice1 = new Invoice();
+            invoice1.setAmount(42.00);
+            invoice1.setMarked_out(false);
+            this.invoiceRepository.save(invoice1);
+
+            //--------------------------------------------
+
             Drive d1 = new Drive();
             d1.setStart(LocalDateTime.of(2021,9,2,15,42,15));
             d1.setEnd(LocalDateTime.of(2021,9,3,16,10,2));
@@ -234,6 +262,8 @@ public class PopulateCarRental {
             d1.setConsumption(8.4);
             d1.setCompletion(true);
             this.driveRepository.save(d1);
+            
+            //--------------------------------------------
 
         };
     }

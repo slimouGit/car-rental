@@ -1,6 +1,5 @@
 package net.slimou.carrental.customer;
 
-import net.slimou.carrental.office.Office;
 import net.slimou.carrental.person.Person;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,6 +30,10 @@ public class Customer {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "person")
     private Person person;
+
+    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Account account;
 
     @ManyToOne
     private Clientele clientele;
@@ -65,5 +68,13 @@ public class Customer {
 
     public void setClientele(Clientele clientele) {
         this.clientele = clientele;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
