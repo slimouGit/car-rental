@@ -100,6 +100,7 @@ public class PopulateCarRental {
             Adress a1 = new Adress("Musterweg", "42", 60439, "Musterstadt");
             this.adressRepository.save(a1);
 
+
             Communication c1 = new Communication("max@mustermann.de", "069-123456789");
             this.communicationRepository.save(c1);
 
@@ -202,6 +203,8 @@ public class PopulateCarRental {
 
             staff1.setEmployees(Arrays.asList(e1,e2));
             staff1.getEmployees().forEach(e->logger.info("Employee: {}",e.getPerson().getForname()));
+            o1.setStaff(staff1);
+            this.officeRepository.save(o1);
 
             //--------------------------------------------
 
@@ -220,11 +223,17 @@ public class PopulateCarRental {
             clientele1.setCustomers(Arrays.asList(customer1));
             clientele1.getCustomers().forEach(e->logger.info("Customer: {}",e.getPerson().getForname()));
 
+            o1.setClientele(clientele1);
+            this.officeRepository.save(o1);
+
             //--------------------------------------------
 
             Fleet fleet1 = new Fleet();
             fleet1.setOffice(o1);
             this.fleetRepository.save(fleet1);
+
+            o1.setFleet(fleet1);
+            this.officeRepository.save(o1);
 
             //--------------------------------------------
 
@@ -253,8 +262,6 @@ public class PopulateCarRental {
             //--------------------------------------------
 
             Invoice invoice1 = new Invoice();
-            invoice1.setAmount(42.00);
-            invoice1.setMarked_out(false);
             this.invoiceRepository.save(invoice1);
 
             //--------------------------------------------
@@ -262,9 +269,6 @@ public class PopulateCarRental {
             Drive d1 = new Drive();
             d1.setStart(LocalDateTime.of(2021,9,2,15,42,15));
             d1.setEnd(LocalDateTime.of(2021,9,3,16,10,2));
-            d1.setDistance(50.45);
-            d1.setConsumption(8.4);
-            d1.setCompletion(true);
             this.driveRepository.save(d1);
             
             //--------------------------------------------
@@ -273,6 +277,9 @@ public class PopulateCarRental {
             r1.setRental_start(LocalDate.of(2011,1,11));
             r1.setRental_end(LocalDate.of(2011,1,12));
             r1.setAccount(account1);
+            r1.setCar(car1);
+            r1.setDrive(d1);
+            r1.setInvoice(invoice1);
             this.reservationRepository.save(r1);
 
             //--------------------------------------------
@@ -280,16 +287,14 @@ public class PopulateCarRental {
             account1.setReservations(Arrays.asList(r1));
             account1.getReservations().forEach(e->logger.info("Customer Reservation: {}",e.getRental_end()));
 
+            customer1.setAccount(account1);
+            this.customerRepository.save(customer1);
+
             //--------------------------------------------
 
 
-            //finalize construct and log structure
-            customer1.setAccount(account1);
-            this.customerRepository.save(customer1);
-            o1.setStaff(staff1);
-            o1.setFleet(fleet1);
-            o1.setClientele(clientele1);
-            this.officeRepository.save(o1);
+
+
 
             logger.info("End");
         };

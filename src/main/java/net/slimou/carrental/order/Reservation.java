@@ -1,6 +1,9 @@
 package net.slimou.carrental.order;
 
 import net.slimou.carrental.customer.Account;
+import net.slimou.carrental.drive.Drive;
+import net.slimou.carrental.fleet.Car;
+import net.slimou.carrental.person.Person;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -25,6 +28,18 @@ public class Reservation {
 
     @ManyToOne
     private Account account;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "car")
+    private Car car;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "drive")
+    private Drive drive;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "invoice")
+    private Invoice invoice;
 
     public Integer getId() {
         return id;
@@ -58,4 +73,27 @@ public class Reservation {
         this.account = account;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Drive getDrive() {
+        return drive;
+    }
+
+    public void setDrive(Drive drive) {
+        this.drive = drive;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
 }
