@@ -18,7 +18,7 @@ public class OrderBook {
     @JoinColumn(name = "employee")
     private Employee employee;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
             name = "reservation",
             joinColumns = @JoinColumn(name = "orderbook_id"),

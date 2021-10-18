@@ -17,7 +17,7 @@ public class Account {
     @JoinColumn(name = "customer")
     private Customer customer;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
             name = "reservation",
             joinColumns = @JoinColumn(name = "account_id"),

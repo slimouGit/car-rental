@@ -315,14 +315,6 @@ public class PopulateCarRental {
 
             //--------------------------------------------
 
-            account1.setReservations(Arrays.asList(r1));
-            account1.getReservations().forEach(e->logger.info("Customer Reservation: {}",e.getRental_end()));
-
-            customer1.setAccount(account1);
-            this.customerRepository.save(customer1);
-
-            //--------------------------------------------
-
             logger.info("End");
         };
     }
