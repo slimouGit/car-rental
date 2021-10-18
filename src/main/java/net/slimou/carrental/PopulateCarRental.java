@@ -56,6 +56,7 @@ public class PopulateCarRental {
     private AccountRepository accountRepository;
     private InvoiceRepository invoiceRepository;
     private ReservationRepository reservationRepository;
+    private OrderBookRepository orderBookRepository;
 
     public PopulateCarRental(AdressRepository adressRepository,
                              CommunicationRepository communicationRepository,
@@ -72,7 +73,8 @@ public class PopulateCarRental {
                              ClienteleRepository clienteleRepository,
                              AccountRepository accountRepository,
                              InvoiceRepository invoiceRepository,
-                             ReservationRepository reservationRepository) {
+                             ReservationRepository reservationRepository,
+                             OrderBookRepository orderBookRepository) {
         this.adressRepository = adressRepository;
         this.communicationRepository = communicationRepository;
         this.officeRepository = officeRepository;
@@ -89,6 +91,7 @@ public class PopulateCarRental {
         this.accountRepository = accountRepository;
         this.invoiceRepository = invoiceRepository;
         this.reservationRepository = reservationRepository;
+        this.orderBookRepository = orderBookRepository;
     }
 
     @Bean
@@ -279,6 +282,12 @@ public class PopulateCarRental {
 
             //--------------------------------------------
 
+            OrderBook ob1 = new OrderBook();
+            ob1.setEmployee(e1);
+            this.orderBookRepository.save(ob1);
+
+            //--------------------------------------------
+
             Invoice invoice1 = new Invoice();
             invoice1.setMarked_out(false);
             invoice1.setSettled_in(false);
@@ -298,6 +307,7 @@ public class PopulateCarRental {
             r1.setRental_start(LocalDate.of(2011,1,11));
             r1.setRental_end(LocalDate.of(2011,1,12));
             r1.setAccount(account1);
+            r1.setOrderBook(ob1);
             r1.setCar(car1);
             r1.setDrive(d1);
             r1.setInvoice(invoice1);

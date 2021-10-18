@@ -2,8 +2,8 @@ package net.slimou.carrental.order;
 
 import net.slimou.carrental.customer.Account;
 import net.slimou.carrental.drive.Drive;
+import net.slimou.carrental.employee.OrderBook;
 import net.slimou.carrental.fleet.Car;
-import net.slimou.carrental.person.Person;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -27,7 +27,12 @@ public class Reservation {
     private LocalDate rental_end;
 
     @ManyToOne
+    @JoinColumn(name = "account_id")
     private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "orderbook_id")
+    private OrderBook orderBook;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "car")
@@ -71,6 +76,14 @@ public class Reservation {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public OrderBook getOrderBook() {
+        return orderBook;
+    }
+
+    public void setOrderBook(OrderBook orderBook) {
+        this.orderBook = orderBook;
     }
 
     public Car getCar() {
