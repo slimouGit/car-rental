@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class PopulateCarRental {
@@ -260,6 +261,7 @@ public class PopulateCarRental {
             car1.setHorsepower(75);
             car1.setEngine(Car.Engine.AUTOMATIC);
             car1.setMileage(84.000);
+            car1.setFuelstatus(25.00);
             car1.setRegistration_date(LocalDate.of(2011,1,11));
             car1.setFleet(fleet1);
             this.carRepository.save(car1);

@@ -61,6 +61,9 @@ public class Car {
     @Column(name="mileage")
     private Double mileage;
 
+    @Column(name="fuelstatus")
+    private Double fuelstatus;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="registration_date")
     private LocalDate registration_date;
@@ -68,54 +71,6 @@ public class Car {
     @ManyToOne
     private Fleet fleet;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Car car = (Car) o;
-
-        if (id != null ? !id.equals(car.id) : car.id != null) return false;
-        if (model != car.model) return false;
-        if (seat != null ? !seat.equals(car.seat) : car.seat != null) return false;
-        if (licence_number != null ? !licence_number.equals(car.licence_number) : car.licence_number != null)
-            return false;
-        if (horsepower != null ? !horsepower.equals(car.horsepower) : car.horsepower != null) return false;
-        if (engine != car.engine) return false;
-        if (mileage != null ? !mileage.equals(car.mileage) : car.mileage != null) return false;
-        if (registration_date != null ? !registration_date.equals(car.registration_date) : car.registration_date != null)
-            return false;
-        return fleet != null ? fleet.equals(car.fleet) : car.fleet == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (model != null ? model.hashCode() : 0);
-        result = 31 * result + (seat != null ? seat.hashCode() : 0);
-        result = 31 * result + (licence_number != null ? licence_number.hashCode() : 0);
-        result = 31 * result + (horsepower != null ? horsepower.hashCode() : 0);
-        result = 31 * result + (engine != null ? engine.hashCode() : 0);
-        result = 31 * result + (mileage != null ? mileage.hashCode() : 0);
-        result = 31 * result + (registration_date != null ? registration_date.hashCode() : 0);
-        result = 31 * result + (fleet != null ? fleet.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", model=" + model +
-                ", seat=" + seat +
-                ", licence_number='" + licence_number + '\'' +
-                ", horsepower=" + horsepower +
-                ", engine=" + engine +
-                ", mileage=" + mileage +
-                ", registration_data=" + registration_date +
-                ", fleet=" + fleet +
-                '}';
-    }
 
     public Integer getId() {
         return id;
@@ -171,6 +126,14 @@ public class Car {
 
     public void setMileage(Double mileage) {
         this.mileage = mileage;
+    }
+
+    public Double getFuelstatus() {
+        return fuelstatus;
+    }
+
+    public void setFuelstatus(Double fuelstatus) {
+        this.fuelstatus = fuelstatus;
     }
 
     public LocalDate getRegistration_date() {
