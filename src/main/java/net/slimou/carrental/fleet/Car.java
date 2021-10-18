@@ -1,5 +1,6 @@
 package net.slimou.carrental.fleet;
 
+import net.slimou.carrental.company.Fleet;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
