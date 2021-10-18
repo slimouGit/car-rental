@@ -1,5 +1,6 @@
-package net.slimou.carrental.fleet;
+package net.slimou.carrental.fleet.repository;
 
+import net.slimou.carrental.fleet.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

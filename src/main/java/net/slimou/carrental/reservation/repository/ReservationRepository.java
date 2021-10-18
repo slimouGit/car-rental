@@ -1,5 +1,6 @@
-package net.slimou.carrental.reservation;
+package net.slimou.carrental.reservation.repository;
 
+import net.slimou.carrental.reservation.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package net.slimou.carrental.human;
+package net.slimou.carrental.human.repository;
 
 import net.slimou.carrental.human.Person_Data;
 import org.springframework.data.jpa.repository.JpaRepository;

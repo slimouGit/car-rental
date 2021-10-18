@@ -1,5 +1,6 @@
-package net.slimou.carrental.contactinformation;
+package net.slimou.carrental.contactinformation.repository;
 
+import net.slimou.carrental.contactinformation.Adress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
